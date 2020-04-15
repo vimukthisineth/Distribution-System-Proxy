@@ -1,10 +1,13 @@
 package com.sliit.research.blockchainbasedapplication.RestClients;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sliit.research.blockchainbasedapplication.blockChain.Block;
 import com.sliit.research.blockchainbasedapplication.blockChain.BlockChain;
 import com.sliit.research.blockchainbasedapplication.model.BlockModel;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class BlockChainMicroserviceRestClient extends AbstractRestClient {
     private final String blockChainMicroserviceUrl = "http://localhost:8055/";
@@ -15,7 +18,12 @@ public class BlockChainMicroserviceRestClient extends AbstractRestClient {
     }
 
     public BlockChain getBlockChain() throws IOException {
-        String response = this.get("api/blockChain");
+        String response = this.get(blockChainMicroserviceUrl+"api/blockChain");
         return mapper.readValue(response, BlockChain.class);
+    }
+
+    public List<Block> getAllBlocksFromDb() throws IOException {
+        String response = this.get(blockChainMicroserviceUrl+"api/getAllBlocksFromDb");
+        return Arrays.asList(mapper.readValue(response, Block[].class));
     }
 }

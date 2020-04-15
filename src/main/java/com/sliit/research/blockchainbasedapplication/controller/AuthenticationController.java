@@ -35,7 +35,7 @@ public class AuthenticationController {
     BlockChainService blockChainService;
 
     @PostMapping("/login")
-    public AuthResponse attemptLogin(HttpServletRequest request, @Valid @RequestBody LoginSignup loginSignup){
+    public AuthResponse attemptLogin(HttpServletRequest request, @Valid @RequestBody LoginSignup loginSignup) throws IOException {
         User user = new User(
                 loginSignup.getFirstName(),
                 loginSignup.getLastName(),

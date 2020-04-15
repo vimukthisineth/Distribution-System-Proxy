@@ -45,7 +45,7 @@ public class ProductController {
     BlockChainService blockChainService;
 
     @PostMapping("/products")
-    public Product createProduct(HttpServletRequest request, @Valid @RequestBody Product product){
+    public Product createProduct(HttpServletRequest request, @Valid @RequestBody Product product) throws IOException {
         BlockChain blockChain = BlockChain.getInstance();
         String blockMessage = "Farmed on: "+new Date().toString();
         if (product.getProductType() == ProductType.MANUFACTURER || product.getProductType() == ProductType.FARMER){
